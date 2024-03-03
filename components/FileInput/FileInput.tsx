@@ -37,7 +37,7 @@ const FileInput = ({ multiple = false, accept = '*' }) => {
         <div className="p-2 overflow-hidden whitespace-nowrap text-ellipsis" >
           {displayText}
           {isHovering && files.length > 1 && (
-            <div className="absolute items-center border-solid border-medium border-default-400 rounded-medium mt-5 p-2 bg-[#1c1c1c]/10 backdrop-blur-md max-h-[7rem] overflow-y-scroll">
+            <div className="absolute items-center border-solid border-medium border-default-400 rounded-medium mt-5 p-2 bg-[#1c1c1c]/10 backdrop-blur-md max-h-[7rem] overflow-y-auto">
               {Array.from(files).map((file, index) => (
                 index > 0 && <div key={index}>{file.name}</div>
               ))}
