@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 main {
-  @apply flex items-center justify-center min-h-screen flex-col
+  @apply flex items-center justify-center min-h-screen flex-row gap-[20rem]
 }
