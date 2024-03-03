@@ -8,5 +8,3 @@
 ![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ---
-[![Known Vulnerabilities](https://snyk.io/test/github/davidpm-19/nextUI-File-Input/badge.svg)]
-(https://snyk.io/test/github/davidpm-19/nextUI-File-Input)
