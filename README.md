@@ -17,9 +17,19 @@ Welcome to this repo, File Input is a highly customizable and easy-to-use React 
 > Right now is the first version. I'm still going to improve and develop more features for the component.
 
 - **Customizable Appearance:** As a tailwind styled button all the elements in the component are fully customizable, including the text, the dropdown and style of borders, colors...
-* **Multiple File Selection:** FileInput offers multiple file selection, depending on it the style will change; currently minimalistic first version of dropdown for multifile display is implemented
+* **Multiple File Selection:** FileInput offers multiple file selection, depending on it the style will change; currently minimalistic modal with a table inside
 + **Integration with NextUI:** FileInput has been built to match the default style of NextUI Input component and variants will be implemented in next versions
 - **Simple File Validation:** In the current version the frontend validations only checks for file types and ensures the user can't select other kind of files
+- **Delete Individual files:** When Selecting multiple Items you can delete individually each item within the modal
+
+## 🐛👨‍💻 Bugs or next features
+
+> [!WARNING]
+> All of the Bugs and features in this list are already on fixing or development process, feel free to comment any bug if not on this list or contribute with your own fix or feature development.
+
+- **🐛 Buttton [Show Files]:** Unexpected behaviour in show files button in which it is shown even with single file selection
+- **👨‍💻 Responsiveness:** Responsiveness is half implemented but needs to be completed for ultra small screens and adapt text behaviour
+
 
 ## 🖥️ Run locally: 
 
