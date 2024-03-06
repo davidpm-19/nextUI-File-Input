@@ -1,50 +1,88 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useFileInput } from './useFileInput';
+import { DeleteIcon } from '../Icon/delete-icon';
+import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from "@nextui-org/react";
+import { bold, regular} from '#/components/fonts/fonts';
+import clsx from 'clsx';
 
 const FileInput = ({ multiple = false, accept = '*' }) => {
   const { inputProps } = useFileInput({ multiple, accept });
   const inputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<FileList | null>(null);
-  const [isHovering, setIsHovering] = useState(false); // New state for hover
+  const [files, setFiles] = useState<Array<File>>([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const displayText = files && files.length > 0 ? isHovering ? `${files[0].name}` : `${files[0].name}${files.length > 1 ? ` +${files.length - 1} files` : ''}` : null;
+  const displayText = files.length > 0 ? `${files[0].name}${files.length > 1 ? ` +${files.length - 1} more` : ''}` : 'No files selected';
+
+  const handleOpen = () => {
+    onOpen();
+  }
 
   const handleFilesChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
-    setFiles(selectedFiles);
-    console.log('Selected Files:', selectedFiles);
+    if (selectedFiles) {
+      setFiles(Array.from(selectedFiles));
+    }
   }, []);
 
-  const handleMouseEnter = () => setIsHovering(true);
-  const handleMouseLeave = () => setIsHovering(false);
+  const deleteFile = useCallback((indexToRemove: number) => {
+    setFiles((currentFiles) => currentFiles.filter((_, index) => index !== indexToRemove));
+  }, []);
 
   return (
-    <div className="flex items-center border-solid w-full border-medium border-default-200 hover:border-default-400 rounded-medium bg-[#1c1c1c]"onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseLeave}>
-      <button
-        type="button"
-        className={`text-white text-start py-2 px-3 h-14 text-small font-normal p-2 ${files && files.length > 0 ? 'w-1/4 border-r-medium rounded-l-medium border-r-default-200' : 'w-full rounded-medium'}`}
-        onClick={() => {
-          console.log("hello");
-          console.log(inputRef.current);
-          inputRef.current && inputRef.current.click();
-        }}
-        
-      >
-        {files && files.length > 0 ? 'Change' : multiple ? 'Select Files' : 'Select File'}
-      </button>
-      {files && files.length > 0 && (
-        <div className="p-2 overflow-hidden whitespace-nowrap text-ellipsis" >
-          {displayText}
-          {isHovering && files.length > 1 && (
-            <div className="absolute items-center border-solid border-medium border-default-400 rounded-medium mt-5 p-2 bg-[#1c1c1c]/10 backdrop-blur-md max-h-[7rem] overflow-y-auto">
-              {Array.from(files).map((file, index) => (
-                index > 0 && <div key={index}>{file.name}</div>
-              ))}
-            </div>
+    <div className="flex flex-col items-center border-solid w-full border-medium border-default-200 hover:border-default-400 rounded-medium bg-[#2A2B2C]">
+      <div className="flex items-center w-full">
+        <Button
+          type="button"
+          className={clsx(`text-white bg-[#2A2B2C] py-2 px-3 h-14 text-small font-normal p-2 ${files.length > 0 ? 'w-1/4 text-start border-r-medium rounded-l-medium rounded-r-none border-r-default-200' : 'w-full rounded-medium text-center'}`,
+                    regular.className)}
+          onClick={() => {
+            inputRef.current && inputRef.current.click();
+          }}
+        >
+          {files.length > 0 ? 'Change' : multiple ? 'Select Files' : 'Select File'}
+        </Button>
+        {files.length > 0 && (
+          <div className="flex-grow p-2 overflow-hidden whitespace-nowrap text-ellipsis">
+            {displayText}
+          </div>
+        )}
+        {files.length > 0 && (
+          <Button
+            type="button"
+            className="text-white font-bold py-2 px-4 rounded bg-transparent"
+            onPress={() => handleOpen()}
+          >
+            Show Files
+          </Button>
+        )}
+      </div>
+      <Modal backdrop='blur' isOpen={isOpen} onClose={onClose} placement='center'>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Selected Files</ModalHeader>
+              <ModalBody>
+                <table className="w-full mt-2 mb-2">
+                  <tbody>
+                    {files.map((file, index) => (
+                      <tr key={index} className="border-b border-default-200">
+                        <td className="p-2 text-white overflow-hidden whitespace-nowrap text-ellipsis">{file.name}</td>
+                        <td className="p-2 flex justify-end">
+                          <div 
+                          className='bg-transparent cursor-pointer'
+                          onClick={() => deleteFile(index)} >
+                            <DeleteIcon/>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </ModalBody>
+            </>
           )}
-        </div>
-      )}
+        </ModalContent>
+      </Modal>
       <input {...inputProps} ref={inputRef} onChange={handleFilesChange} style={{ display: 'none' }} />
     </div>
   );
