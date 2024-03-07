@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useFileInput } from './useFileInput';
 import { DeleteIcon } from '../Icon/delete-icon';
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from "@nextui-org/react";
-import { bold, regular} from '#/components/fonts/fonts';
+import { regular} from '#/components/fonts/fonts';
 import clsx from 'clsx';
 
 const FileInput = ({ multiple = false, accept = '*' }) => {

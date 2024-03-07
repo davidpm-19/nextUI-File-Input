@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { useTheme as useNextTheme } from "next-themes";
-import { Switch } from "@nextui-org/react";
-import { regular } from '#/components/fonts/fonts';
 import "@theme-toggles/react/css/Classic.css"
 import { Classic } from "@theme-toggles/react"
 
