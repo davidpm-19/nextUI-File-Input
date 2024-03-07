@@ -29,11 +29,11 @@ const FileInput = ({ multiple = false, accept = '*' }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center border-solid w-full border-medium border-default-200 hover:border-default-400 rounded-medium bg-[#2A2B2C]">
+    <div className="flex flex-col justify-center items-center border-solid w-full max-w-sm md:max-w-[95%] border-medium border-default-200 hover:border-default-400 rounded-medium bg-interactive_bg mr-4 ml-4">
       <div className="flex items-center w-full">
         <Button
           type="button"
-          className={clsx(`text-white bg-[#2A2B2C] py-2 px-3 h-14 text-small font-normal p-2 ${files.length > 0 ? 'w-1/4 text-start border-r-medium rounded-l-medium rounded-r-none border-r-default-200' : 'w-full rounded-medium text-center'}`,
+          className={clsx(`text-foreground bg-interactive_bg py-2 px-3 h-14 text-small font-normal p-2 ${files.length > 0 ? 'w-1/4 text-start border-r-medium rounded-l-medium rounded-r-none border-r-default-200' : 'w-full rounded-medium text-center'}`,
                     regular.className)}
           onClick={() => {
             inputRef.current && inputRef.current.click();
@@ -46,17 +46,25 @@ const FileInput = ({ multiple = false, accept = '*' }) => {
             {displayText}
           </div>
         )}
-        {files.length > 0 && (
+        {files.length > 1 && (
           <Button
             type="button"
-            className="text-white font-bold py-2 px-4 rounded bg-transparent"
+            className="text-foreground font-bold py-2 px-4 rounded bg-transparent"
             onPress={() => handleOpen()}
           >
             Show Files
           </Button>
         )}
+        {files.length === 1 && (
+          <div 
+            className='cursor-pointer px-4'
+            onClick={() => deleteFile(0)} // Assuming you want to delete the first (and only) file
+          >
+            <DeleteIcon/>
+          </div>
+        )}
       </div>
-      <Modal backdrop='blur' isOpen={isOpen} onClose={onClose} placement='center'>
+      <Modal backdrop='blur' isOpen={isOpen} onClose={onClose} placement='top'>
         <ModalContent>
           {(onClose) => (
             <>
@@ -66,7 +74,7 @@ const FileInput = ({ multiple = false, accept = '*' }) => {
                   <tbody>
                     {files.map((file, index) => (
                       <tr key={index} className="border-b border-default-200">
-                        <td className="p-2 text-white overflow-hidden whitespace-nowrap text-ellipsis">{file.name}</td>
+                        <td className="p-2 text-foreground overflow-hidden whitespace-nowrap text-ellipsis">{file.name}</td>
                         <td className="p-2 flex justify-end">
                           <div 
                           className='bg-transparent cursor-pointer'

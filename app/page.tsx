@@ -4,6 +4,7 @@ import { bold, regular} from '#/components/fonts/fonts';
 import { Checkbox} from '@nextui-org/react';
 import clsx from "clsx"
 import FileInput from '#/components/FileInput/FileInput';
+import { DarkModeSwitch } from '#/components/darkmodeswitch';
 export default function Content() {
   const [isMultiple, setIsMultiple] = useState(false);
   const [accept, setAccept] = useState('');
@@ -18,18 +19,21 @@ export default function Content() {
 
   return (
     <main>
-      <div>
-        <h1 className={clsx("rounded-full text-[4rem] text-[#E3E3E3] text-center", bold.className)}>Check <span className='bg-clip-text text-transparent bg-gradient-to-tr from-[#00c6ff] to-[#0072ff]'>File Input</span> Component</h1>
-        <h4 className={clsx("rounded-full text-md text-[#E3E3E3] text-center mb-3", regular.className)}>This is the first version of a NextUI alike File Input featuring multiple selection and type filter </h4>
+      <div className='fixed z-100 top-[1rem] left-[1rem]'>
+      <DarkModeSwitch/>
+      </div>
+      <div className='flex flex-col items-center'>
+        <h1 className={clsx("rounded-full text-[3rem] md:text-[4rem] text-foreground text-center", bold.className)}>Check <br className=' block md:hidden'/><span className='bg-clip-text text-transparent bg-gradient-to-tr from-clip_bg_start to-clip_bg_end'>File Input</span> Component</h1>
+        <h4 className={clsx("rounded-full text-md text-foreground text-center mb-3", regular.className)}>This is the first version of a NextUI alike File Input featuring multiple selection and type filter </h4>
         <div
           className='flex flex-col gap-2 mb-4 justify-center'
         >
           <h4 className={clsx('text-center', regular.className
 
-          )}>Choose Filters</h4>
+          )}>Choose Filters</h4> 
           <div className='flex gap-4 justify-center'>
-            <Checkbox checked={isMultiple} onChange={handleMultipleChange} className={clsx(regular.className, 'font-sm [&_span]:before:bg-[#2A2B2C]')}>Multiple Files</Checkbox>
-            <Checkbox checked={accept.includes('image/png') || accept.includes('image/jpeg')} onChange={handleAcceptChange} className={clsx(regular.className, 'font-sm [&_span]:before:bg-[#2A2B2C]')}>Images Only</Checkbox>
+            <Checkbox checked={isMultiple} onChange={handleMultipleChange} className={clsx(regular.className, 'font-sm [&_span]:before:bg-interactive_bg')}>Multiple Files</Checkbox>
+            <Checkbox checked={accept.includes('image/png') || accept.includes('image/jpeg')} onChange={handleAcceptChange} className={clsx(regular.className, 'font-sm [&_span]:before:bg-interactive_bg')}>Images Only</Checkbox>
           </div>
         </div>
         <FileInput multiple={isMultiple} accept={accept}></FileInput>

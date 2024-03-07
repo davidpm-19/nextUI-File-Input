@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 main {
-  @apply flex items-center justify-center min-h-screen flex-row gap-[20rem] bg-gradient-to-tr from-[#232526] to-[#414345]
+  @apply flex items-center justify-center min-h-screen flex-row gap-[20rem] bg-gradient-to-tr from-bg_start to-bg_end
 }
