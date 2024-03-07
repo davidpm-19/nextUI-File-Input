@@ -54,3 +54,11 @@ Run the app:
 ```
   npm run dev
 ```
+
+---
+
+##### SonarCloud Stats
+
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=davidpm-19_nextUI-File-Input&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=davidpm-19_nextUI-File-Input)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=davidpm-19_nextUI-File-Input&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=davidpm-19_nextUI-File-Input)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=davidpm-19_nextUI-File-Input&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=davidpm-19_nextUI-File-Input)
