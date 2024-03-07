@@ -1,7 +1,6 @@
 import { Providers } from "#/app/provider";
 import "#/styles/main.css";
-import "@theme-toggles/react/css/classic.css"
-import Head from "next/head";
+import "@theme-toggles/react/css/Classic.css"
 import type { Metadata } from 'next';
 type LayoutProps = { children: React.ReactNode; }
 
